@@ -4,8 +4,8 @@ const appId = "nipQFVGTqbv61vQjA7ZjakZIZM2kDbKegtQD7k1d"; // Testnet
 const serverUrl = "https://yqiwoaj07xdh.usemoralis.com:2053/server"; // Testnet
 
 
-//const nft_contract_address = "0xf9e50cF1967A759969b1454c9f99a3E7C45d6c88"; //NFT Minting Contract Use This One "Batteries Included", code of this contract is in the github repository under contract_base for your reference.
-const test_contract_address = "0x111be21B4Cca9bA106c9033F3e19958D51342F11";
+//const nft_contract_address = "0x8e937fAE28652749c5c44a0Ab9ba90bCF73B60ab"; //NFT Minting Contract Use This One "Batteries Included", code of this contract is in the github repository under contract_base for your reference.
+const test_contract_address = "0x6698fd89ED2d97db73Db84958fCa47973A73cEa8";
 /*
 Available deployed contracts
 Ethereum Rinkeby 0x0Fb6EF3505b9c52Ed39595433a21aF9B5FCc4431
@@ -15,26 +15,11 @@ BSC Testnet 0x88624DD1c725C6A95E223170fa99ddB22E1C6DDD
 //initializeWeb3();
 
 
-function handleMoralisError(err) {
-    switch (err.code) {
-      case Moralis.Error.INVALID_SESSION_TOKEN:
-        Moralis.User.logOut();
-        // If web browser, render a log in screen
-        // If Express.js, redirect the user to the log in route
-        break;
-  
-      // Other Moralis API errors that you want to explicitly handle
-    }
-  }
-
 prtTotalSupply();
 document.getElementById("getWallet").onclick = connectWallet;
 document.getElementById("logOut").onclick = logOut;
 
 const web3 = new Web3(window.ethereum);
-
-
-
 
 //Step 1 Initialize Web3
 async function connectWallet() {
@@ -44,7 +29,7 @@ async function connectWallet() {
             signingMessage: "Log in using Moralis"
         })
         .then(function (user){
-            console.log("logged in: ", user);
+      //      console.log("logged in: ", user);
             let ethAddress = user.get("ethAddress");
             document.getElementById("getWallet").textContent = `${ethAddress}`;
         })
@@ -61,7 +46,7 @@ async function connectWallet() {
 async function logOut() {
     await Moralis.User.logOut();
     document.getElementById("getWallet").textContent = "Connect Wallet";
-    console.log("logged out");
+  //  console.log("logged out");
   }
 
 //Step 2 Generate Character
@@ -80,13 +65,14 @@ async function getNftPicture() {
                 name: character["Names"],
                 image: character["URI"],
                 seller_fee_basis_points: 750,
-                fee_recipient: "0xde152f5fAF03ec67F7e0BC7970A2f6529DB64301",
+                fee_recipient: "0xEed63211B522d264d2EaFa59540114eb073491f6",
             };
             const metadataFile = new Moralis.File("metadata.json", {
                 base64: btoa(JSON.stringify(metadata)),
             });
             await metadataFile.saveIPFS();
             const metadataURI = metadataFile.ipfs();
+          //  console.log(metadataURI);
             //    displayNFT(metadataURI);
             await mintNft(metadataURI).then(console.log);
         } catch (error) {
@@ -127,24 +113,24 @@ async function mintNft(metadataURI) {
     var ABI = [
         {
             inputs: [
-              {
-                internalType: "string",
-                name: "tokenURI",
-                type: "string"
-              }
+                {
+                    internalType: "string",
+                    name: "URI",
+                    type: "string"
+                }
             ],
             name: "mint",
             outputs: [],
-            stateMutability: "nonpayable",
+            stateMutability: "payable",
             type: "function"
-          },
+        },
     ];
     const options = {
         contractAddress: test_contract_address,
         functionName: "mint",
         abi: ABI,
-        params: { uri: metadataURI },
-     //  msgValue: Moralis.Units.ETH(0.01),
+        params: { URI: metadataURI },        
+        msgValue: Moralis.Units.ETH(0.355)
     };
     let tx = await Moralis.executeFunction(options);
     return tx.wait(); 
