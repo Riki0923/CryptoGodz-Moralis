@@ -11,7 +11,9 @@ async function upload(){
         let data = fileInput.files[i];
         let imageFile = new Moralis.File(data.name, data);
         await imageFile.saveIPFS();
+        console.log(imageFile.ipfs(), imageFile.hash());
         ipfsUris[i+1] = imageFile.ipfs();
     }
     console.log(ipfsUris);
+
 }
