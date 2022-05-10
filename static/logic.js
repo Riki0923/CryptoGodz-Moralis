@@ -1,27 +1,27 @@
 //const appId = "ElUr7RZ9LgJNDvnDi02ajnrO49wS4vqi43wEdrPr"; // Application id from moralis.io
 //const serverUrl = "https://qxsyq5mbz9gk.usemoralis.com:2053/server"; //Server url from moralis.io
-const appId = "jvsGZy1YKe8oDZupLqXIHVAUO1GFJjlm2cTWWoIP"; // Testnet
-const serverUrl = "https://em4slaeur9ue.usemoralis.com:2053/server"; // Testnet
-//Moralis.start({serverUrl,appId});
+const appId = "nipQFVGTqbv61vQjA7ZjakZIZM2kDbKegtQD7k1d"; // Testnet
+const serverUrl = "https://yqiwoaj07xdh.usemoralis.com:2053/server"; // Testnet
 Moralis.enableWeb3();
 
 
 //const nft_contract_address = "0x8e937fAE28652749c5c44a0Ab9ba90bCF73B60ab"; //NFT Minting Contract Use This One "Batteries Included", code of this contract is in the github repository under contract_base for your reference.
 const test_contract_address = "0x0b479E40f49779d2953655dEEEC660F4267F25B7";
-/*
-Available deployed contracts
-Ethereum Rinkeby 0x0Fb6EF3505b9c52Ed39595433a21aF9B5FCc4431
-Polygon Mumbai 0x351bbee7C6E9268A1BF741B098448477E08A0a53
-BSC Testnet 0x88624DD1c725C6A95E223170fa99ddB22E1C6DDD
-*/
-//initializeWeb3();
 
 
+
+initMoralis();
 prtTotalSupply();
 document.getElementById("getWallet").onclick = connectWallet;
 document.getElementById("logOut").onclick = logOut;
 
 const web3 = new Web3(window.ethereum);
+
+
+async function initMoralis(){
+    Moralis.start({ serverUrl, appId });
+    await Moralis.initPlugins();
+}
 
 //Step 1 Initialize Web3
 async function connectWallet() {
@@ -357,27 +357,22 @@ async function mintNft(metadataURI) {
       name: 'tokenURI',
       }]
   }, [_uri]);
-
   const transactionParameters = {
     to: nft_contract_address,
     from: ethereum.selectedAddress,
     data: encodedFunction,
-
-
   };
   const txt = await ethereum.request({
     method: 'eth_sendTransaction',
     params: [transactionParameters],
-
   });
-
   return txt */
 
 
 async function prtTotalSupply() {
     await Moralis.start({
-        serverUrl: "https://em4slaeur9ue.usemoralis.com:2053/server",
-        appId: "jvsGZy1YKe8oDZupLqXIHVAUO1GFJjlm2cTWWoIPd",
+        serverUrl: "https://yqiwoaj07xdh.usemoralis.com:2053/server",
+        appId: "nipQFVGTqbv61vQjA7ZjakZIZM2kDbKegtQD7k1d",
     }); 
     const ABI = [
         {
