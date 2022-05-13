@@ -2,54 +2,45 @@
 //const serverUrl = "https://qxsyq5mbz9gk.usemoralis.com:2053/server"; //Server url from moralis.io
 const appId = "nipQFVGTqbv61vQjA7ZjakZIZM2kDbKegtQD7k1d"; // Testnet
 const serverUrl = "https://yqiwoaj07xdh.usemoralis.com:2053/server"; // Testnet
-Moralis.enableWeb3();
-
 
 //const nft_contract_address = "0x8e937fAE28652749c5c44a0Ab9ba90bCF73B60ab"; //NFT Minting Contract Use This One "Batteries Included", code of this contract is in the github repository under contract_base for your reference.
 const test_contract_address = "0x0b479E40f49779d2953655dEEEC660F4267F25B7";
 
-
-
 initMoralis();
 prtTotalSupply();
-document.getElementById("getWallet").onclick = connectWallet;
-document.getElementById("logOut").onclick = logOut;
 
-const web3 = new Web3(window.ethereum);
+// const web3 = new Web3(window.ethereum);
 
-
-async function initMoralis(){
-    Moralis.start({ serverUrl, appId });
-    await Moralis.initPlugins();
+async function initMoralis() {
+    await Moralis.start({ serverUrl, appId });
+    await Moralis.enableWeb3();
 }
 
 //Step 1 Initialize Web3
 async function connectWallet() {
     let user = Moralis.User.current();
-    if(!user) {
-        user = await Moralis.authenticate({
-            signingMessage: "Log in using Moralis"
-        })
-        .then(function (user){
-      //      console.log("logged in: ", user);
+
+    if (!user) {
+        try {
+            user = await Moralis.authenticate({
+                signingMessage: "Log in using Moralis",
+            });
             let ethAddress = user.get("ethAddress");
             document.getElementById("getWallet").textContent = `${ethAddress}`;
-        })
-        .catch(function (error) {
+        } catch (error) {
             console.log(error);
-        });
+        }
     } else {
         let ethAddress = user.get("ethAddress");
         document.getElementById("getWallet").textContent = `${ethAddress}`;
     }
-    Moralis.start({ appId, serverUrl });
 }
 
 async function logOut() {
     await Moralis.User.logOut();
     document.getElementById("getWallet").textContent = "Connect Wallet";
-  //  console.log("logged out");
-  }
+    console.log("logged out");
+}
 
 //Step 2 Generate Character
 async function getNftPicture() {
@@ -315,40 +306,39 @@ async function mapNft(charIndex) {
         219: "Yamir",
         220: "Yemaya",
         221: "Yum Kaax",
-        222: "Zeus"
+        222: "Zeus",
     };
     return { Names: iNames[charIndex], URI: ipfsUris[charIndex] };
 }
 
-async function mintNft(metadataURI) { 
-
+async function mintNft(metadataURI) {
     var ABI = [
         {
             inputs: [
                 {
                     internalType: "string",
                     name: "URI",
-                    type: "string"
-                }
+                    type: "string",
+                },
             ],
             name: "mint",
             outputs: [],
             stateMutability: "payable",
-            type: "function"
+            type: "function",
         },
     ];
     const options = {
         contractAddress: test_contract_address,
         functionName: "mint",
         abi: ABI,
-        params: { URI: metadataURI },        
-        msgValue: Moralis.Units.ETH(0.355)
+        params: { URI: metadataURI },
+        msgValue: Moralis.Units.ETH(0.355),
     };
     let tx = await Moralis.executeFunction(options);
-    return tx.wait(); 
+    return tx.wait();
 }
 
-   /*
+/*
   const encodedFunction = web3.eth.abi.encodeFunctionCall({
     name: "mintNft",
     type: "function",
@@ -368,12 +358,7 @@ async function mintNft(metadataURI) {
   });
   return txt */
 
-
 async function prtTotalSupply() {
-    await Moralis.start({
-        serverUrl: "https://yqiwoaj07xdh.usemoralis.com:2053/server",
-        appId: "nipQFVGTqbv61vQjA7ZjakZIZM2kDbKegtQD7k1d",
-    }); 
     const ABI = [
         {
             inputs: [],
@@ -400,8 +385,12 @@ async function prtTotalSupply() {
     };
     const allowance = await Moralis.Web3API.native.runContractFunction(options);
     document.getElementById("totalSupply").innerHTML = `<div>${
-        allowance -1 
+        allowance - 1
     } / 222 Nft minted</div>`;
     console.log("Next Id that is going to be minted is: " + allowance);
     return allowance;
-} 
+}
+
+document.getElementById("logOut").onclick = logOut;
+document.getElementById("getWallet").onclick = connectWallet;
+document.getElementById("getCharacter").onclick = getNftPicture;
