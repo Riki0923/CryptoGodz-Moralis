@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // const appId = "WEnQ8Jwbf2BUYrEyHjojwr16z5HlG7F1ldh6wYY1"; // MAINNET
 // const serverUrl = "https://c5wwdbkka83e.usemoralis.com:2053/server"; //MAINNET
 const appId = "59Ly5P8lU4zEIccGbR9wS1V7k6GU5vmWizxPmTCW"; // Rinkeby Testnet
@@ -16,21 +15,6 @@ prtTotalSupply();
 
 // const web3 = new Web3(window.ethereum);
 
-=======
-//const appId = "ElUr7RZ9LgJNDvnDi02ajnrO49wS4vqi43wEdrPr"; // Application id from moralis.io
-//const serverUrl = "https://qxsyq5mbz9gk.usemoralis.com:2053/server"; //Server url from moralis.io
-const appId = "nipQFVGTqbv61vQjA7ZjakZIZM2kDbKegtQD7k1d"; // Testnet
-const serverUrl = "https://yqiwoaj07xdh.usemoralis.com:2053/server"; // Testnet
-
-//const nft_contract_address = "0x8e937fAE28652749c5c44a0Ab9ba90bCF73B60ab"; //NFT Minting Contract Use This One "Batteries Included", code of this contract is in the github repository under contract_base for your reference.
-const test_contract_address = "0x0b479E40f49779d2953655dEEEC660F4267F25B7";
-
-initMoralis();
-prtTotalSupply();
-
-// const web3 = new Web3(window.ethereum);
-
->>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
 async function initMoralis() {
     await Moralis.start({ serverUrl, appId });
     await Moralis.enableWeb3();
@@ -97,7 +81,6 @@ async function getNftPicture() {
     }
 }
 
-<<<<<<< HEAD
 }
 
 async function getNftPicture2() {
@@ -130,29 +113,6 @@ async function getNftPicture2() {
             } catch (error) {
                 console.log(error);
             }
-=======
-    if (charIndex == 222) {
-        alert("All NFTs minted in the contract!");
-    } else {
-        try {
-            const character = await mapNft(charIndex);
-            const metadata = {
-                name: character["Names"],
-                image: character["URI"],
-                seller_fee_basis_points: 750,
-                fee_recipient: "0xb0073A64D1424fF800262814Fd65E29AeceF5A46",
-            };
-            const metadataFile = new Moralis.File("metadata.json", {
-                base64: btoa(JSON.stringify(metadata)),
-            });
-            await metadataFile.saveIPFS();
-            const metadataURI = metadataFile.ipfs();
-            //console.log(metadataURI);
-            //    displayNFT(metadataURI);
-            await mintNft(metadataURI).then(console.log);
-        } catch (error) {
-            console.log(error);
->>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
         }
 }
 
@@ -501,11 +461,7 @@ async function mapNft(charIndex) {
         65: "Heimdall",
         66: "Heka",
         67: "Hela",
-<<<<<<< HEAD
         68: "Helios",
-=======
-        68: "Heilos",
->>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
         69: "Hera",
         70: "Hermes",
         71: "Heryshaf",
@@ -539,11 +495,7 @@ async function mapNft(charIndex) {
         99: "Keto",
         100: "Khnum",
         101: "Khonsu",
-<<<<<<< HEAD
         102: "Kingu",
-=======
-        102: "Kinghu",
->>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
         103: "Kinich Ahau",
         104: "Koyash",
         105: "Kratos",
@@ -664,7 +616,6 @@ async function mapNft(charIndex) {
         220: "Yemaya",
         221: "Yum Kaax",
         222: "Zeus",
-<<<<<<< HEAD
         223:"Adroa",
         224:"Agyo",
         225:"Ah Puch",
@@ -887,14 +838,11 @@ async function mapNft(charIndex) {
         442:"Yemaya",
         443:"Yum Kaax",
         444: "Zeus"
-=======
->>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
     };
     return { Names: iNames[charIndex], URI: ipfsUris[charIndex] };
 }
 
 async function mintNft(metadataURI) {
-<<<<<<< HEAD
     // THIS IS NEEDED FOR MAINNET ( ETH SENDING TO THE GNOSIS WALLET )
     // const options1 = {
     //     type: "native",
@@ -903,15 +851,12 @@ async function mintNft(metadataURI) {
     //     gasValue: 3000000
     // }
     // await Moralis.transfer(options1);
-=======
->>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
     var ABI = [
         {
             inputs: [
                 {
                     internalType: "string",
                     name: "URI",
-<<<<<<< HEAD
                     type: "string"
                 }
             ],
@@ -919,15 +864,6 @@ async function mintNft(metadataURI) {
             outputs: [],
             stateMutability: "nonpayable",
             type: "function"
-=======
-                    type: "string",
-                },
-            ],
-            name: "mint",
-            outputs: [],
-            stateMutability: "payable",
-            type: "function",
->>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
         },
     ];
     const options = {
@@ -935,16 +871,11 @@ async function mintNft(metadataURI) {
         functionName: "mint",
         abi: ABI,
         params: { URI: metadataURI },
-<<<<<<< HEAD
-=======
-        msgValue: Moralis.Units.ETH(0.355),
->>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
     };
     let tx = await Moralis.executeFunction(options);
     return tx.wait();
 }
 
-<<<<<<< HEAD
 
 async function mintChosen(metadataURI){
     let chosenMintId = document.getElementById("mintSelected").value;
@@ -980,28 +911,6 @@ async function mintChosen(metadataURI){
 
 }
 
-=======
-/*
-  const encodedFunction = web3.eth.abi.encodeFunctionCall({
-    name: "mintNft",
-    type: "function",
-    inputs: [{
-      type: 'string',
-      name: 'tokenURI',
-      }]
-  }, [_uri]);
-  const transactionParameters = {
-    to: nft_contract_address,
-    from: ethereum.selectedAddress,
-    data: encodedFunction,
-  };
-  const txt = await ethereum.request({
-    method: 'eth_sendTransaction',
-    params: [transactionParameters],
-  });
-  return txt */
-
->>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
 async function prtTotalSupply() {
     const ABI = [
         {
@@ -1031,19 +940,12 @@ async function prtTotalSupply() {
         allowance - 1
     } / 222 Nft minted</div>`;
     console.log("Next Id that is going to be minted is: " + allowance);
-<<<<<<< HEAD
     return allowance; 
-=======
-    return allowance;
->>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
 }
 
 document.getElementById("logOut").onclick = logOut;
 document.getElementById("getWallet").onclick = connectWallet;
 document.getElementById("getCharacter").onclick = getNftPicture;
-<<<<<<< HEAD
 document.getElementById("mintC").onclick = getNftPicture2;
 //document.getElementById("metadata").onclick = getAllMetadata;
 document.getElementById("batch").onclick = batchMint;
-=======
->>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
