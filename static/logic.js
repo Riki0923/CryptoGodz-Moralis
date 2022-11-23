@@ -1,13 +1,37 @@
-const appId = "59Ly5P8lU4zEIccGbR9wS1V7k6GU5vmWizxPmTCW"; // This is testnet
-const serverUrl = "https://detbyyesfssy.usemoralis.com:2053/server"; //This is testnet
+<<<<<<< HEAD
+// const appId = "WEnQ8Jwbf2BUYrEyHjojwr16z5HlG7F1ldh6wYY1"; // MAINNET
+// const serverUrl = "https://c5wwdbkka83e.usemoralis.com:2053/server"; //MAINNET
+const appId = "59Ly5P8lU4zEIccGbR9wS1V7k6GU5vmWizxPmTCW"; // Rinkeby Testnet
+const serverUrl = "https://detbyyesfssy.usemoralis.com:2053/server"; // Rinkeby Testnet
 
 const nft_contract_address = "0x4dc0a04196a3b6cE88998e1f592EdaB3b0Ff06e9";
+
+const nft_contract_address = "0x2a84DC0793af04830cc43740965342385e999a79";
+
+// new mainnet contract: 0xad4fe34A032549C0E8C98eFc9B572C7F1b8aA9FE  
+
+// Itt ki van mintelve minden teszten: 0x7418172A8AA0587cF20bBF38CE18eCcd7401cBcd
 
 initMoralis();
 // prtTotalSupply();
 
 // const web3 = new Web3(window.ethereum);
 
+=======
+//const appId = "ElUr7RZ9LgJNDvnDi02ajnrO49wS4vqi43wEdrPr"; // Application id from moralis.io
+//const serverUrl = "https://qxsyq5mbz9gk.usemoralis.com:2053/server"; //Server url from moralis.io
+const appId = "nipQFVGTqbv61vQjA7ZjakZIZM2kDbKegtQD7k1d"; // Testnet
+const serverUrl = "https://yqiwoaj07xdh.usemoralis.com:2053/server"; // Testnet
+
+//const nft_contract_address = "0x8e937fAE28652749c5c44a0Ab9ba90bCF73B60ab"; //NFT Minting Contract Use This One "Batteries Included", code of this contract is in the github repository under contract_base for your reference.
+const test_contract_address = "0x0b479E40f49779d2953655dEEEC660F4267F25B7";
+
+initMoralis();
+prtTotalSupply();
+
+// const web3 = new Web3(window.ethereum);
+
+>>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
 async function initMoralis() {
     await Moralis.start({ serverUrl, appId });
     await Moralis.enableWeb3();
@@ -74,6 +98,7 @@ async function getNftPicture() {
     }
 }
 
+<<<<<<< HEAD
 }
 
 async function getNftPicture2() {
@@ -107,6 +132,29 @@ async function getNftPicture2() {
             } catch (error) {
                 console.log(error);
             }
+=======
+    if (charIndex == 222) {
+        alert("All NFTs minted in the contract!");
+    } else {
+        try {
+            const character = await mapNft(charIndex);
+            const metadata = {
+                name: character["Names"],
+                image: character["URI"],
+                seller_fee_basis_points: 750,
+                fee_recipient: "0xb0073A64D1424fF800262814Fd65E29AeceF5A46",
+            };
+            const metadataFile = new Moralis.File("metadata.json", {
+                base64: btoa(JSON.stringify(metadata)),
+            });
+            await metadataFile.saveIPFS();
+            const metadataURI = metadataFile.ipfs();
+            //console.log(metadataURI);
+            //    displayNFT(metadataURI);
+            await mintNft(metadataURI).then(console.log);
+        } catch (error) {
+            console.log(error);
+>>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
         }
 }
 
@@ -203,7 +251,11 @@ async function mapNft(charIndex) {
         65: "Heimdall",
         66: "Heka",
         67: "Hela",
+<<<<<<< HEAD
         68: "Helios",
+=======
+        68: "Heilos",
+>>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
         69: "Hera",
         70: "Hermes",
         71: "Heryshaf",
@@ -237,7 +289,11 @@ async function mapNft(charIndex) {
         99: "Keto",
         100: "Khnum",
         101: "Khonsu",
+<<<<<<< HEAD
         102: "Kingu",
+=======
+        102: "Kinghu",
+>>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
         103: "Kinich Ahau",
         104: "Koyash",
         105: "Kratos",
@@ -357,45 +413,288 @@ async function mapNft(charIndex) {
         219: "Yamir",
         220: "Yemaya",
         221: "Yum Kaax",
-        222: "Zeus"
+        222: "Zeus",
+<<<<<<< HEAD
+        223:"Adroa",
+        224:"Agyo",
+        225:"Ah Puch",
+        226:"Ahti",
+        227:"Ahura Mazda",
+        228:"Aine",
+        229:"Akna",
+        230:"Akras",
+        231:"Akuanduba",
+        232:"Aligank",
+        233:"Altjira",
+        234:"Amaterasu",
+        235:"Amatsu Mikabosshi",
+        236:"Ammun",
+        237:"Anahit",
+        238:"Anguta",
+        239:"Antu",
+        240:"Anubis",
+        241:"Anuti",
+        242:"Apedemak",
+        243:"Apep",
+        244:"Aphrodite",
+        245:"Apollo",
+        246:"Ares",
+        247:"Asclepius",
+        248:"Asena",
+        249:"Ash",
+        250:"Astghik",
+        251:"Aten",
+        252:"Athena",
+        253:"Babi",
+        254:"Baldur",
+        255:"Bat",
+        256:"Belobong",
+        257:"Bishamon",
+        258:"Bixia",
+        259:"Boreas",
+        260:"Bragi",
+        261:"Buluku",
+        262:"Bumba",
+        263:"Cabracan",
+        264:"Caer",
+        265:"Chac",
+        266:"Coi Coi Vilu",
+        267:"Cybelle",
+        268:"Damballa",
+        269:"Denwin",
+        270:"Diana",
+        271:"Dolos",
+        272:"Enlil",
+        273:"Eros",
+        274:"Forseti",
+        275:"Frigg",
+        276:"Fufluns",
+        277:"Fujin",
+        278:"Furrina",
+        279:"Gengen Wer",
+        280:"Gilgamesh",
+        281:"Glooskap",
+        282:"Hades",
+        283:"Hapi",
+        284:"Hathor",
+        285:"Haurun",
+        286:"Hedetet",
+        287:"Heimdall",
+        288:"Heka",
+        289:"Hela",
+        290:"Helios",
+        291:"Hera",
+        292:"Hermes",
+        293:"Heryshaf",
+        294:"Hoderi",
+        295:"Hodiak",
+        296:"Horus",
+        297:"Hotei",
+        298:"Huitzilopochtli",
+        299:"Hurracan",
+        300:"Hypons",
+        301:"Icarus",
+        302:"Ilmarinen",
+        303:"Inari",
+        304:"Inti",
+        305:"Ishara",
+        306:"Ishtar",
+        307:"Isis",
+        308:"Ixchel",
+        309:"Izanagi",
+        310:"Izanami",
+        311:"Jizo",
+        312:"Julunggul",
+        313:"Juno",
+        314:"Jupiter",
+        315:"Kaggen",
+        316:"Kamapuaa",
+        317:"Kanaloa",
+        318:"Kane",
+        319:"Kannon",
+        320:"Kauriraris",
+        321:"Keto",
+        322:"Khnum",
+        323:"Khonsu",
+        324:"Kingu",
+        325:"Kinich Ahau",
+        326:"Koyash",
+        327:"Kratos",
+        328:"Lada",
+        329:"Laka",
+        330:"Legba",
+        331:"Lei Gong",
+        332:"Leno",
+        333:"Lilinoe",
+        334:"Loki",
+        335:"Longwang",
+        336:"Mafuie",
+        337:"Marduk",
+        338:"Marmoo",
+        339:"Mars",
+        340:"Mbombu",
+        341:"Mebege",
+        342:"Mictlantecuhtli",
+        343:"Min",
+        344:"Minerva",
+        345:"Mixcoatl",
+        346:"Mokosh",
+        347:"Montu",
+        348:"Morpheus",
+        349:"Na Maka Kaha",
+        350:"Nanabozho",
+        351:"Nannar",
+        352:"Nemesis",
+        353:"Nephthys",
+        354:"Neptune",
+        355:"Nike",
+        356:"Nikkiri",
+        357:"Ninhursag",
+        358:"Ninigi",
+        359:"Ninlil",
+        360:"Ninsun",
+        361:"Nojir",
+        362:"Obatala",
+        363:"Odin",
+        364:"Ogo",
+        365:"Ogun",
+        366:"Okuninushi",
+        367:"Osiris",
+        368:"Ozomalti",
+        369:"Pangu",
+        370:"Papatuanuku",
+        371:"Pele",
+        372:"Perun",
+        373:"Pluto",
+        374:"Poseidon",
+        375:"Prometheus",
+        376:"Ptah",
+        377:"Ra",
+        378:"Raginui",
+        379:"Renenutet",
+        380:"Ruti",
+        381:"Sah",
+        382:"Saturn",
+        383:"Saxnot",
+        384:"Sedna",
+        385:"Sekhmet",
+        386:"Sepa",
+        387:"Seshat",
+        388:"Set",
+        389:"Shango",
+        390:"Shezmu",
+        391:"Shiva",
+        392:"Sif",
+        393:"Sobek",
+        394:"Supay",
+        395:"Surma",
+        396:"Susanoo",
+        397:"Svarog",
+        398:"Tagaloa",
+        399:"Tapio",
+        400:"Tara",
+        401:"Tawaret",
+        402:"Tengu",
+        403:"Tezcatlipoca",
+        404:"Thanatos",
+        405:"Themis",
+        406:"Thor",
+        407:"Thoronas",
+        408:"Thoth",
+        409:"Thunor",
+        410:"Tiamat",
+        411:"Tsukyomi",
+        412:"Tuoni",
+        413:"Tyr",
+        414:"Uguo",
+        415:"Ukko",
+        416:"Ulgen",
+        417:"Ullu",
+        418:"Uni",
+        419:"Uranus",
+        420:"Usil",
+        421:"Utu",
+        422:"Vahagn",
+        423:"Vaisravana",
+        424:"Vajrapani",
+        425:"Vammatar",
+        426:"Veles",
+        427:"Velle",
+        428:"Venus",
+        429:"Vesna",
+        430:"Vesta",
+        431:"Viracocha",
+        432:"Votan",
+        433:"Vulcan",
+        434:"Wakan Tanka",
+        435:"Wenenut",
+        436:"Wepwawet",
+        437:"Woden",
+        438:"Xipe Totec",
+        439:"Xochiquetzal",
+        440:"Xolotl",
+        441:"Yamir",
+        442:"Yemaya",
+        443:"Yum Kaax",
+        444: "Zeus"
+=======
+>>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
     };
     return { Names: iNames[charIndex], URI: ipfsUris[charIndex] };
 }
 
-// async function sendETH() {
-//     const options1 = {
-//         type: "native",
-//         receiver: "0xb0073A64D1424fF800262814Fd65E29AeceF5A46",
-//         amount: Moralis.Units.ETH(0.5),
-//     }
-//     await Moralis.transfer(options1);
-//     alert("You successfully sent 0.5ETH to CryptoGodz address. You will receive your NFT soon via OpenSea. Please be aware that only main transactions count for this puchase");
+async function mintNft(metadataURI) {
+<<<<<<< HEAD
+    // THIS IS NEEDED FOR MAINNET ( ETH SENDING TO THE GNOSIS WALLET )
+    // const options1 = {
+    //     type: "native",
+    //     receiver: "0xb0073A64D1424fF800262814Fd65E29AeceF5A46",
+    //     amount: Moralis.Units.ETH(0.5),
+    //     gasValue: 3000000
+    // }
+    // await Moralis.transfer(options1);
+=======
+>>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
+    var ABI = [
+        {
+            inputs: [
+                {
+                    internalType: "string",
+                    name: "URI",
+<<<<<<< HEAD
+                    type: "string"
+                }
+            ],
+            name: "mint",
+            outputs: [],
+            stateMutability: "nonpayable",
+            type: "function"
+=======
+                    type: "string",
+                },
+            ],
+            name: "mint",
+            outputs: [],
+            stateMutability: "payable",
+            type: "function",
+>>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
+        },
+    ];
+    const options = {
+        contractAddress: nft_contract_address,
+        functionName: "mint",
+        abi: ABI,
+        params: { URI: metadataURI },
+<<<<<<< HEAD
+=======
+        msgValue: Moralis.Units.ETH(0.355),
+>>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
+    };
+    let tx = await Moralis.executeFunction(options);
+    return tx.wait();
+}
 
-//     // var ABI = [
-//     //     {
-//     //         inputs: [
-//     //             {
-//     //                 internalType: "string",
-//     //                 name: "URI",
-//     //                 type: "string"
-//     //             }
-//     //         ],
-//     //         name: "mint",
-//     //         outputs: [],
-//     //         stateMutability: "nonpayable",
-//     //         type: "function"
-//     //     },
-//     // ];
-//     // const options = {
-//     //     contractAddress: nft_contract_address,
-//     //     functionName: "mint",
-//     //     abi: ABI,
-//     //     params: { URI: metadataURI },
-//     // };
-//     // let tx = await Moralis.executeFunction(options);
-//     // return tx.wait();
-// }
-
+<<<<<<< HEAD
 
 async function mintChosen(metadataURI){
     let chosenMintId = document.getElementById("chosen").value;
@@ -431,6 +730,28 @@ async function mintChosen(metadataURI){
 
 }
 
+=======
+/*
+  const encodedFunction = web3.eth.abi.encodeFunctionCall({
+    name: "mintNft",
+    type: "function",
+    inputs: [{
+      type: 'string',
+      name: 'tokenURI',
+      }]
+  }, [_uri]);
+  const transactionParameters = {
+    to: nft_contract_address,
+    from: ethereum.selectedAddress,
+    data: encodedFunction,
+  };
+  const txt = await ethereum.request({
+    method: 'eth_sendTransaction',
+    params: [transactionParameters],
+  });
+  return txt */
+
+>>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
 async function prtTotalSupply() {
     const ABI = [
         {
@@ -456,16 +777,23 @@ async function prtTotalSupply() {
         abi: ABI,
     };
     const allowance = await Moralis.Web3API.native.runContractFunction(options);
-    // document.getElementById("totalSupply").innerHTML = `<div>${
-    //     allowance - 1
-    // } / 222 Nft minted</div>`;
-    // console.log("Next Id that is going to be minted is: " + allowance);
-    // return allowance; 
+    document.getElementById("totalSupply").innerHTML = `<div>${
+        allowance - 1
+    } / 222 Nft minted</div>`;
+    console.log("Next Id that is going to be minted is: " + allowance);
+<<<<<<< HEAD
+    return allowance; 
+=======
+    return allowance;
+>>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
 }
 
 document.getElementById("logOut").onclick = logOut;
 document.getElementById("getWallet").onclick = connectWallet;
-// document.getElementById("getCharacter").onclick = sendETH;
-// document.getElementById("mintC").onclick = getNftPicture2;
+document.getElementById("getCharacter").onclick = getNftPicture;
+<<<<<<< HEAD
+document.getElementById("mintC").onclick = getNftPicture2;
 //document.getElementById("metadata").onclick = getAllMetadata;
-document.getElementById("getCharacter").onclick = getNftPicture2;
+document.getElementById("batch").onclick = batchMint;
+=======
+>>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
