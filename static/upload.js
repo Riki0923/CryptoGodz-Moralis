@@ -1,10 +1,14 @@
-<<<<<<< HEAD
-Moralis.initialize("WEnQ8Jwbf2BUYrEyHjojwr16z5HlG7F1ldh6wYY1"); // Application id from moralis.io
-Moralis.serverURL = "https://c5wwdbkka83e.usemoralis.com:2053/server"; //Server url from moralis.io
-Moralis.authenticate()
+const appId = "59Ly5P8lU4zEIccGbR9wS1V7k6GU5vmWizxPmTCW"; // This is testnet
+const serverUrl = "https://detbyyesfssy.usemoralis.com:2053/server"; //This is testnet
 
-=======
->>>>>>> 7a11c052f52b2ec4a0a6961254d813b9a7ddfb4d
+initMoralis();
+
+async function initMoralis() {
+    await Moralis.start({ serverUrl, appId });
+    await Moralis.enableWeb3();
+}
+
+
 async function upload() {
     const fileInput = document.getElementById("files");
     const ipfsUris = {};
